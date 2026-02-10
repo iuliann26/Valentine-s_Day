@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pentru Tine ❤️</title>
+    
+    <!-- Fonturi Noi: Dancing Script (Romantic) & Nunito (Drăgălaș) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Biblioteci Externe -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #d63384; /* Roz zmeură mai închis */
+            --secondary: #6f42c1; /* Mov */
+            --glass-bg: rgba(255, 255, 255, 0.95); /* Mult mai opac pentru vizibilitate */
+            --glass-border: rgba(255, 255, 255, 0.9);
+            --text-main: #2d3436;
+            --shadow: 0 20px 60px rgba(0,0,0,0.3); /* Umbră mai puternică */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            /* Gradient nou: Mov închis spre Roz aprins */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff758c 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Container Principal - Mai vizibil */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px); /* Blur mai puternic */
+            -webkit-backdrop-filter: blur(40px);
+            border: 4px solid var(--glass-border); /* Bordură mai groasă */
+            border-radius: 30px;
+            padding: 30px 20px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 10;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary);
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            /* Text shadow pentru contrast */
+            text-shadow: 2px 2px 0px rgba(255, 230, 230, 1);
+        }
+
+        p {
+            color: #4a4a4a;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .gif-wrapper {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white; /* Fundal alb sub gif ca să se vadă clar */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+            padding: 10px; /* Ramă albă */
+        }
+        
+        .gif-wrapper img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        /* Butoane */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            width: 100%;
+            min-height: 60px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 5;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            flex-grow: 1;
+            max-width: 200px;
+        }
+
+        .btn-yes:active { transform: scale(0.95); }
+
+        .btn-no {
+            background: #fff;
+            color: #ff416c;
+            border: 2px solid #ff416c;
+        }
+
+        /* AI Section */
+        .ai-section {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed rgba(0,0,0,0.1);
+            animation: slideUp 0.6s ease;
+        }
+
+        .oracle-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .oracle-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 12px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .oracle-btn:hover, .oracle-btn:active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .ai-result {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            font-size: 1rem;
+            color: #333;
+            min-height: 60px;
+            border: 2px solid #ffccd5;
+            position: relative;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        /* Loader */
+        .heart-loader {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+            transform: scale(0.6);
+        }
+        .heart-loader div {
+            top: 23px;
+            left: 19px;
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: var(--primary);
+            animation: heart-loader 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .heart-loader div:after,
+        .heart-loader div:before {
+            content: " ";
+            position: absolute;
+            display: block;
+            width: 26px;
+            height: 26px;
+            background: var(--primary);
+        }
+        .heart-loader div:before {
+            left: -17px;
+            border-radius: 50% 0 0 50%;
+        }
+        .heart-loader div:after {
+            top: -17px;
+            border-radius: 50% 50% 0 0;
+        }
+        @keyframes heart-loader {
+            0% { transform: scale(0.95); }
+            5% { transform: scale(1.1); }
+            39% { transform: scale(0.85); }
+            45% { transform: scale(1); }
+            60% { transform: scale(0.95); }
+            100% { transform: scale(0.9); }
+        }
+
+        .card::-webkit-scrollbar { width: 0 !important; }
+        
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Floating Hearts BG */
+        .bg-hearts { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .float-heart { position: absolute; color: rgba(255, 255, 255, 0.2); font-size: 20px; animation: float 6s linear infinite; }
+        @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 50% { opacity: 0.5; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-hearts" id="bgHearts"></div>
+
+    <div class="card">
+    
+        <div class="gif-wrapper" id="gifContainer">
+            <img src="https://media.tenor.com/VIChDQ6ejRQAAAAi/cute-bear.gif" alt="Cute Bears Asking">
+        </div>
+
+        <h1 id="mainTitle">Vrei să fii<br>Valentine-ul meu? 🌹</h1>
+        <p id="subTitle">Promit că nu fur cartofii prăjiți! (Prea des)</p>
+
+        <div class="btn-group" id="questionBtns">
+            <button class="btn btn-yes" onclick="handleYes()">DA! ❤️</button>
+            <button class="btn btn-no" id="btnNo" onclick="moveButton()" onmouseover="moveButton()">Nu</button>
+        </div>
+
+        <!-- AI SECTION (Ascuns inițial) -->
+        <div class="ai-section" id="aiSection">
+            <p style="margin-bottom: 15px; font-weight: 900; color: var(--primary);">✨ Oracle of Love (AI) ✨</p>
+            <p style="font-size: 0.9rem; margin-bottom: 15px;">Alege ce vrei să ne genereze Gemini:</p>
+            
+            <div class="oracle-options">
+                <button class="oracle-btn" onclick="askOracle('prediction')">🔮 Viitorul Nostru</button>
+                <button class="oracle-btn" onclick="askOracle('dateIdea')">🥂 Date Idea</button>
+                <button class="oracle-btn" onclick="askOracle('compliment')">💌 Compliment</button>
+                <button class="oracle-btn" onclick="askOracle('poem')">📜 Poezie Funny</button>
+            </div>
+
+            <div class="ai-result" id="aiResultBox">
+                Alege o opțiune de mai sus! 👆
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /
+        const API_KEY = "__GEMINI_API_KEY__"; 
+
+        // Elemente
+        const btnNo = document.getElementById('btnNo');
+        const btnYes = document.querySelector('.btn-yes');
+        const mainTitle = document.getElementById('mainTitle');
+        const subTitle = document.getElementById('subTitle');
+        const gifContainer = document.getElementById('gifContainer');
+        const aiSection = document.getElementById('aiSection');
+        const aiResultBox = document.getElementById('aiResultBox');
+        const questionBtns = document.getElementById('questionBtns');
+
+        // --- LOGICA VIZUALĂ ---
+
+        // Fundal inimi
+        function createBackground() {
+            const container = document.getElementById('bgHearts');
+            for(let i=0; i<20; i++) {
+                const h = document.createElement('div');
+                h.classList.add('float-heart');
+                h.innerHTML = '❤️';
+                h.style.left = Math.random() * 100 + 'vw';
+                h.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                h.style.fontSize = (Math.random() * 30 + 10) + 'px';
+                h.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(h);
+            }
+        }
+        createBackground();
+
+        // Butonul NU fuge (Mobile Friendly)
+        let noCount = 0;
+        const noTexts = ["Nu", "Sigur?", "Pe bune?", "Mai gândește-te!", "O să plâng...", "Ultima șansă!"];
+
+        function moveButton() {
+            noCount++;
+            btnNo.innerText = noTexts[Math.min(noCount, noTexts.length - 1)];
+            
+            // Calculăm limitele sigure ca să nu iasă din card sau ecran
+            const card = document.querySelector('.card');
+            
+            // Mișcare limitată pe mobil (max 100px distanță)
+            const range = window.innerWidth < 600 ? 60 : 150;
+            
+            const randomX = (Math.random() - 0.5) * range;
+            const randomY = (Math.random() - 0.5) * range;
+
+            btnNo.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            
+            // Creștem butonul DA
+            const currentScale = 1 + (noCount * 0.1);
+            btnYes.style.transform = `scale(${currentScale})`;
+        }
+
+        // Când zice DA
+        function handleYes() {
+            triggerConfetti();
+            
+            mainTitle.innerHTML = "Yeeey! <br>Știam eu! 🥰";
+            subTitle.innerText = "Pregătește-te pentru cel mai frumos Valentine's!";
+            
+            // Schimbăm GIF-ul cu unul de sărbătoare (Milk & Mocha Hug)
+            gifContainer.innerHTML = '<img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Bears">';
+            
+            // Ascundem butoanele de întrebare
+            questionBtns.style.display = 'none';
+            
+            // Arătăm secțiunea AI
+            aiSection.style.display = 'block';
+        }
+
+        // --- GEMINI AI LOGIC ---
+
+        async function askOracle(type) {
+            // UI Loading
+            aiResultBox.innerHTML = '<div style="text-align:center"><div class="heart-loader"><div></div><div></div><div></div></div><br>Gemini se gândește...</div>';
+            
+            let prompt = "";
+            switch(type) {
+                case 'prediction':
+                    prompt = "Ești un oracol amuzant al dragostei. Fă o predicție scurtă și haioasă despre viitorul acestui cuplu în 2025. (Maxim 2 fraze, folosește emoji).";
+                    break;
+                case 'dateIdea':
+                    prompt = "Dă-mi o idee de întâlnire (Date Night) unică și romantică, dar nu foarte scumpă. Ceva memorabil. Scurt și la obiect.";
+                    break;
+                case 'compliment':
+                    prompt = "Generează un compliment suprem pentru iubita mea. Ceva care să o facă să zâmbească instant. Să fie drăguț și original.";
+                    break;
+                case 'poem':
+                    prompt = "Scrie o poezie foarte scurtă (4 versuri) și amuzantă despre dragoste, cartofi prăjiți și fericire. În română.";
+                    break;
+            }
+
+            try {
+                // Verificare cheie
+                if (API_KEY.includes("GEMINI_API_KEY")) {
+                    throw new Error("API Key lipsește! (Configurare GitHub Actions necesară)");
+                }
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+
+                const data = await response.json();
+                if (data.error) throw new Error(data.error.message);
+                
+                const text = data.candidates[0].content.parts[0].text;
+                
+                // Afișare text (Markdown parsed)
+                aiResultBox.innerHTML = marked.parse(text);
+
+            } catch (error) {
+                console.error(error);
+                aiResultBox.innerHTML = `<span style="color:red">Oups! Gemini a adormit. 😴<br>Dar eu tot te iubesc!</span>`;
+            }
+        }
+
+        // --- CONFETTI ---
+        function triggerConfetti() {
+            const end = Date.now() + 3000;
+            const colors = ['#ff416c', '#ff4b2b', '#ffffff'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+    </script>
+</body>
+</html>
