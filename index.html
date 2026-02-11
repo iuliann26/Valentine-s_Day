@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pentru Stefi ❤️</title>
+    <title>Valentine's Quest | Pentru Stefi ❤️</title>
     
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
             --accent: #ff2d55;
             --accent-soft: #ff85a2;
             --bg-dark: #2d132c;
-            --glass: rgba(255, 255, 255, 0.92);
+            --glass: rgba(255, 255, 255, 0.94);
             --font-main: 'Outfit', sans-serif;
             --font-fancy: 'Dancing Script', cursive;
         }
@@ -34,7 +34,7 @@
         }
 
         body {
-            min-height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -44,7 +44,7 @@
             position: relative;
         }
 
-        /* Animated Background Gradient Layer */
+        /* Animated Background */
         .bg-layer {
             position: absolute;
             inset: 0;
@@ -60,153 +60,126 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Floating Bokeh Effects */
-        .bokeh {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: var(--accent);
-            filter: blur(80px);
-            border-radius: 50%;
-            opacity: 0.4;
-            z-index: -1;
-            animation: move-bokeh 20s infinite alternate;
-            pointer-events: none;
-        }
-
-        @keyframes move-bokeh {
-            from { transform: translate(-20%, -20%); }
-            to { transform: translate(120%, 120%); }
-        }
-
-        /* Main Card Setup */
         .stage {
-            width: 90%;
+            width: 92%;
             max-width: 420px;
             z-index: 10;
-            perspective: 1000px;
-            max-height: 95vh;
             display: flex;
             flex-direction: column;
+            height: auto;
+            max-height: 90vh;
         }
 
         .envelope {
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-radius: 28px;
-            padding: 30px 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 25px 20px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             text-align: center;
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
-            overflow-y: auto;
-            max-height: 90vh;
+            overflow-y: auto; /* Permite scroll-ul pe mobil */
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-soft) transparent;
         }
 
-        /* Elements */
+        /* Joculeț: Target Hearts */
+        #gameArea {
+            height: 200px;
+            width: 100%;
+            position: relative;
+            background: rgba(255, 45, 85, 0.05);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: none;
+            border: 2px dashed var(--accent-soft);
+        }
+
+        .game-heart {
+            position: absolute;
+            cursor: pointer;
+            font-size: 2rem;
+            user-select: none;
+            transition: transform 0.1s;
+            filter: drop-shadow(0 0 5px white);
+        }
+
+        /* UI Elements */
         h1 {
             font-family: var(--font-fancy);
-            font-size: clamp(2.2rem, 8vw, 2.8rem);
+            font-size: clamp(2rem, 8vw, 2.6rem);
             color: var(--accent);
-            margin-bottom: 15px;
-            line-height: 1.2;
+            margin-bottom: 10px;
         }
 
         .sticker-container {
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-radius: 20px;
             overflow: hidden;
             background: #fff;
-            padding: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 5px;
         }
 
         .sticker-container img {
             width: 100%;
-            max-width: 180px;
+            max-width: 160px;
             display: block;
             margin: 0 auto;
-            border-radius: 12px;
         }
 
         .subtitle {
-            font-weight: 300;
+            font-weight: 400;
             color: #555;
-            font-size: clamp(0.9rem, 4vw, 1.05rem);
-            margin-bottom: 25px;
-            letter-spacing: 0.5px;
-            padding: 0 10px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
         }
 
-        /* Luxury Buttons */
+        /* Buttons */
         .action-area {
             display: flex;
-            gap: 12px;
-            min-height: 70px;
+            gap: 10px;
+            min-height: 80px;
             align-items: center;
             justify-content: center;
-            position: relative;
             width: 100%;
         }
 
         .btn {
             border: none;
-            padding: 15px 25px;
-            border-radius: 18px;
+            padding: 14px 20px;
+            border-radius: 20px;
             font-weight: 800;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s;
             font-family: var(--font-main);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            user-select: none;
         }
 
         .btn-yes {
             background: var(--accent);
             color: white;
-            box-shadow: 0 10px 20px rgba(255, 45, 85, 0.3);
             flex: 1.5;
-            z-index: 10;
+            box-shadow: 0 5px 15px rgba(255, 45, 85, 0.3);
         }
 
         .btn-no {
             background: #f1f2f6;
             color: #333;
             flex: 1;
-            font-size: 0.85rem;
-            z-index: 5;
         }
 
-        /* AI Love Oracle Section */
+        /* AI Section - Fix pentru vizibilitate mobil */
         .ai-portal {
             display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.08);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(0,0,0,0.05);
             text-align: left;
-            animation: reveal 0.8s ease;
-        }
-
-        @keyframes reveal {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .oracle-header {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 12px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .pill-grid {
@@ -217,136 +190,88 @@
         }
 
         .pill {
-            background: white;
+            background: #fff;
             border: 1px solid #eee;
-            padding: 12px 8px;
-            border-radius: 14px;
+            padding: 12px 5px;
+            border-radius: 15px;
             font-size: 0.8rem;
             cursor: pointer;
             text-align: center;
             font-weight: 700;
-            transition: 0.3s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
-        .pill:active { 
-            transform: scale(0.95); 
-            background: var(--accent); 
-            color: white; 
-            border-color: var(--accent); 
-        }
-
         .ai-canvas {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
             padding: 15px;
-            min-height: 100px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #333;
-            position: relative;
+            min-height: 120px;
+            font-size: 0.9rem;
+            line-height: 1.6;
             border: 1px solid #fff;
+            margin-bottom: 10px; /* Spațiu la finalul scroll-ului */
         }
 
-        /* Typewriter Cursor */
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background: var(--accent);
-            margin-left: 2px;
-            animation: blink 0.8s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Loader */
         .loader-wrap {
             display: none;
-            position: absolute;
-            inset: 0;
-            background: rgba(255,255,255,0.85);
-            z-index: 5;
-            align-items: center;
-            justify-content: center;
-            border-radius: 18px;
+            text-align: center;
+            padding: 10px;
         }
 
+        /* Heart Loader */
         .lds-heart {
             display: inline-block;
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 40px;
+            height: 40px;
             transform: rotate(45deg);
-            transform-origin: 30px 30px;
         }
         .lds-heart div {
-            top: 24px;
-            left: 24px;
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
+            top: 16px; left: 16px; position: absolute;
+            width: 16px; height: 16px; background: var(--accent);
             animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
         }
         .lds-heart div:after, .lds-heart div:before {
-            content: " ";
-            position: absolute;
-            display: block;
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
+            content: " "; position: absolute; display: block;
+            width: 16px; height: 16px; background: var(--accent);
         }
-        .lds-heart div:before { left: -18px; border-radius: 50% 0 0 50%; }
-        .lds-heart div:after { top: -18px; border-radius: 50% 50% 0 0; }
+        .lds-heart div:before { left: -12px; border-radius: 50% 0 0 50%; }
+        .lds-heart div:after { top: -12px; border-radius: 50% 50% 0 0; }
         @keyframes lds-heart {
-            0% { transform: scale(0.95); }
-            5% { transform: scale(1.1); }
-            39% { transform: scale(0.85); }
-            45% { transform: scale(1); }
-            60% { transform: scale(0.95); }
-            100% { transform: scale(0.9); }
+            0% { transform: scale(0.95); } 5% { transform: scale(1.1); }
+            39% { transform: scale(0.85); } 45% { transform: scale(1); }
+            60% { transform: scale(0.95); } 100% { transform: scale(0.9); }
         }
 
-        /* Particles Layer */
-        #particles {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
-
-        /* Scrollbar styles */
-        .envelope::-webkit-scrollbar {
-            width: 4px;
-        }
-        .envelope::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .envelope::-webkit-scrollbar-thumb {
-            background: var(--accent-soft);
-            border-radius: 10px;
-        }
+        #particles { position: absolute; inset: 0; pointer-events: none; }
     </style>
 </head>
 <body>
 
     <div class="bg-layer"></div>
-    <div class="bokeh" style="top: 10%; left: 10%;"></div>
-    <div class="bokeh" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
-    
     <div id="particles"></div>
 
     <main class="stage">
         <div class="envelope" id="mainCard">
-            <!-- STICKERUL ORIGINAL -->
-            <div class="sticker-container" id="stickerBox">
+            <!-- STICKER -->
+            <div class="sticker-container">
                 <img src="https://media.tenor.com/VIChDQ6ejRQAAAAi/cute-bear.gif" alt="Cute Bear" id="mainSticker">
             </div>
 
-            <div id="initialContent">
-                <h1 id="title">Vrei să fii <br>Valentine-ul meu?</h1>
-                <p class="subtitle">Promit să-ți dau mereu dreptate (sau măcar să încerc)! 🌹</p>
+            <!-- START GAME SCREEN -->
+            <div id="gameIntro">
+                <h1>Valentine's Quest</h1>
+                <p class="subtitle">Stefi, trebuie să treci testul dragostei!<br>Prinde 5 inimi pentru a debloca întrebarea.</p>
+                <button class="btn btn-yes" style="width: 100%;" onclick="startQuest()">ÎNCEPE JOCUL</button>
+            </div>
+
+            <!-- GAME AREA -->
+            <div id="gameArea"></div>
+
+            <!-- QUESTION SCREEN (HIDDEN) -->
+            <div id="questionContent" style="display: none;">
+                <h1 id="title">Bravo! Acum...</h1>
+                <p class="subtitle">Vrei să fii Valentine-ul meu? 🌹</p>
 
                 <div class="action-area" id="btnContainer">
                     <button class="btn btn-yes" id="yesBtn" onclick="celebrate()">DA! ❤️</button>
@@ -356,17 +281,14 @@
 
             <!-- SUCCESS SECTION -->
             <div id="successContent" style="display: none;">
-                <h1 style="font-size: 2.2rem;">Știam eu! 🥰</h1>
-                <p class="subtitle">Ești cea mai mare bucurie a mea. Iată ce spune Gemini despre noi:</p>
+                <h1>Știam eu! 🥰</h1>
+                <p class="subtitle">Apasă pe opțiunile de mai jos pentru a vedea ce ne pregătește viitorul:</p>
                 
-                <div class="ai-portal" id="aiPortal">
-                    <div class="oracle-header">
-                        <i class="fa-solid fa-sparkles"></i> Oracle of Love
-                    </div>
+                <div class="ai-portal" id="aiPortal" style="display: block;">
                     <div class="pill-grid">
                         <div class="pill" onclick="askGemini('date')">📍 Date Night</div>
                         <div class="pill" onclick="askGemini('future')">🔮 Viitorul</div>
-                        <div class="pill" onclick="askGemini('poem')">✍️ O Poezie</div>
+                        <div class="pill" onclick="askGemini('poem')">✍️ Poezie</div>
                         <div class="pill" onclick="askGemini('compliment')">💌 Compliment</div>
                     </div>
                     
@@ -374,107 +296,109 @@
                         <div class="loader-wrap" id="aiLoader">
                             <div class="lds-heart"><div></div></div>
                         </div>
-                        <div id="typewriterText">Apasă pe o steluță de mai sus... ✨</div>
-                        <span class="cursor" id="cursor"></span>
+                        <div id="typewriterText">Gemini așteaptă alegerea ta... ✨</div>
                     </div>
+                    <!-- Indicator vizual pentru scroll -->
+                    <p style="font-size: 0.7rem; color: #999; margin-top: 5px;">* Trage în sus pentru a citi tot mesajul</p>
                 </div>
             </div>
         </div>
     </main>
 
     <script>
-        // CONFIGURATION (Injected by GitHub Actions)
         const API_KEY = "__GEMINI_API_KEY__";
 
-        const btnNo = document.getElementById('btnNo');
-        const btnYes = document.getElementById('yesBtn');
-        const card = document.getElementById('mainCard');
-        const successContent = document.getElementById('successContent');
-        const initialContent = document.getElementById('initialContent');
-        const sticker = document.getElementById('mainSticker');
-        const aiLoader = document.getElementById('aiLoader');
-        const typewriterText = document.getElementById('typewriterText');
-        const cursor = document.getElementById('cursor');
+        let score = 0;
+        const targetScore = 5;
 
-        let evasionCount = 0;
+        // --- GAME LOGIC ---
+        function startQuest() {
+            document.getElementById('gameIntro').style.display = 'none';
+            document.getElementById('gameArea').style.display = 'block';
+            spawnHeart();
+        }
+
+        function spawnHeart() {
+            if (score >= targetScore) {
+                endGame();
+                return;
+            }
+            const area = document.getElementById('gameArea');
+            const heart = document.createElement('div');
+            heart.className = 'game-heart';
+            heart.innerHTML = '❤️';
+            
+            const x = Math.random() * (area.clientWidth - 40);
+            const y = Math.random() * (area.clientHeight - 40);
+            
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            
+            heart.onclick = () => {
+                score++;
+                heart.remove();
+                spawnHeart();
+            };
+            
+            area.appendChild(heart);
+        }
+
+        function endGame() {
+            document.getElementById('gameArea').style.display = 'none';
+            document.getElementById('questionContent').style.display = 'block';
+        }
 
         // --- BUTTON EVASION ---
+        let evasionCount = 0;
         function evade(e) {
             if (e) e.preventDefault();
             evasionCount++;
+            const btnNo = document.getElementById('btnNo');
+            const btnYes = document.getElementById('yesBtn');
             
-            // Funny text progression
-            const texts = ["Nu", "Sigur?", "Gândește-te!", "Ești rea! 😢", "Te rog!", "Apasă DA!"];
+            const texts = ["Nu", "Sigur?", "Mai gândește-te!", "Ești rea! 😢", "Te rog!", "Apasă DA!"];
             btnNo.innerText = texts[Math.min(evasionCount, texts.length - 1)];
 
-            // Movement logic tailored for mobile
-            // We use a smaller range and ensure it stays within viewable container area
-            const range = window.innerWidth < 600 ? 60 : 120;
+            const range = 70;
             const x = (Math.random() - 0.5) * range;
             const y = (Math.random() - 0.5) * range;
-            
             btnNo.style.transform = `translate(${x}px, ${y}px)`;
             
-            // Inflate YES button
-            const scale = 1 + (evasionCount * 0.12);
+            const scale = 1 + (evasionCount * 0.15);
             btnYes.style.transform = `scale(${scale})`;
-            
-            // On mobile, if the button grows too much, we might need to adjust card layout
-            if (scale > 1.8) {
-                btnYes.style.position = "relative";
-                btnYes.style.width = "100%";
-            }
         }
 
-        // --- CELEBRATION ---
+        // --- CELEBRATE ---
         function celebrate() {
-            // Confetti
-            const duration = 4000;
-            const end = Date.now() + duration;
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff2d55', '#ffffff']
+            });
 
-            (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60, spread: 55, origin: { x: 0 },
-                    colors: ['#ff2d55', '#ffffff']
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120, spread: 55, origin: { x: 1 },
-                    colors: ['#ff2d55', '#ffffff']
-                });
-                if (Date.now() < end) requestAnimationFrame(frame);
-            }());
-
-            // UI Switch
-            initialContent.style.display = 'none';
-            successContent.style.display = 'block';
-            document.getElementById('aiPortal').style.display = 'block';
-            sticker.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
-            
-            card.style.transform = "scale(1.02)";
+            document.getElementById('questionContent').style.display = 'none';
+            document.getElementById('successContent').style.display = 'block';
+            document.getElementById('mainSticker').src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
         }
 
         // --- AI INTEGRATION ---
         async function askGemini(mode) {
-            if (aiLoader.style.display === 'flex') return;
-
-            // Reset UI
-            aiLoader.style.display = 'flex';
-            typewriterText.innerText = "";
-            cursor.style.display = 'inline-block';
+            const loader = document.getElementById('aiLoader');
+            const textDisplay = document.getElementById('typewriterText');
+            
+            loader.style.display = 'block';
+            textDisplay.innerText = "";
 
             let prompt = "";
             switch(mode) {
-                case 'date': prompt = "Dă-mi o idee de întâlnire romantică și amuzantă pentru Stefi și iubitul ei în București. Scurt și creativ."; break;
-                case 'future': prompt = "Fă o predicție haioasă și drăguță despre viitorul acestui cuplu în 2025. Maxim 2 fraze."; break;
-                case 'poem': prompt = "Scrie o poezie foarte scurtă, de 4 versuri, despre dragoste și mic dejun în pat. În română."; break;
-                case 'compliment': prompt = "Generează cel mai frumos și original compliment pentru Stefi. Să o facă să zâmbească instant."; break;
+                case 'date': prompt = "O idee de întâlnire romantică în București pentru Stefi și iubitul ei. Scurt și creativ."; break;
+                case 'future': prompt = "O predicție amuzantă despre viitorul acestui cuplu în 2025. Maxim 2 fraze."; break;
+                case 'poem': prompt = "O poezie de 4 versuri despre dragoste și cafea dimineața. În română."; break;
+                case 'compliment': prompt = "Un compliment original pentru Stefi care să o facă să râdă."; break;
             }
 
             try {
-                if(API_KEY.includes("GEMINI_API_KEY")) throw new Error("Key Missing");
-
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -484,33 +408,31 @@
                 const data = await response.json();
                 const text = data.candidates[0].content.parts[0].text;
                 
-                aiLoader.style.display = 'none';
-                typeEffect(text.trim());
+                loader.style.display = 'none';
+                typeWriterEffect(text.trim(), textDisplay);
 
             } catch (err) {
-                aiLoader.style.display = 'none';
-                typeEffect("Te iubesc infinit, mai mult decât orice AI poate scrie! ❤️");
+                loader.style.display = 'none';
+                textDisplay.innerText = "Te iubesc mai mult decât orice eroare de server! ❤️";
             }
         }
 
-        function typeEffect(text) {
+        function typeWriterEffect(text, element) {
             let i = 0;
-            const speed = 40; // Slightly slower for mobile readability
             function type() {
                 if (i < text.length) {
-                    typewriterText.innerText += text.charAt(i);
+                    element.innerHTML += text.charAt(i);
                     i++;
-                    setTimeout(type, speed);
-                    // Scroll to bottom as text appears if needed
+                    setTimeout(type, 30);
+                    // Auto-scroll pentru a vedea ce se scrie
+                    const card = document.getElementById('mainCard');
                     card.scrollTop = card.scrollHeight;
-                } else {
-                    cursor.style.display = 'none';
                 }
             }
             type();
         }
 
-        // Create initial floating hearts
+        // Floating background hearts
         const pContainer = document.getElementById('particles');
         for(let i=0; i<15; i++) {
             const h = document.createElement('div');
@@ -518,15 +440,9 @@
             h.style.position = "absolute";
             h.style.left = Math.random() * 100 + "%";
             h.style.top = Math.random() * 100 + "%";
-            h.style.opacity = Math.random() * 0.4;
-            h.style.fontSize = Math.random() * 15 + 10 + "px";
-            h.style.transition = "transform 5s ease-in-out";
+            h.style.opacity = "0.2";
+            h.style.fontSize = Math.random() * 20 + 10 + "px";
             pContainer.appendChild(h);
-            
-            // Subtle floating animation
-            setInterval(() => {
-                h.style.transform = `translate(${(Math.random()-0.5)*20}px, ${(Math.random()-0.5)*20}px)`;
-            }, 3000);
         }
     </script>
 </body>
